@@ -43,7 +43,7 @@ struct SettingsView: View {
                                 .foregroundColor(themeManager.current.textSecondary)
                                 .padding(.horizontal, 4)
                             
-                            HStack(spacing: 12) {
+                            HStack(spacing: 10) {
                                 ForEach(AppTheme.allCases, id: \.self) { theme in
                                     Button {
                                         HapticManager.selection()
@@ -51,41 +51,42 @@ struct SettingsView: View {
                                             themeManager.current = theme
                                         }
                                     } label: {
-                                        ZStack {
-                                            RoundedRectangle(cornerRadius: 16)
-                                                .fill(theme == .dark ? Color(hex: "#111111") : Color(hex: "#0D0018"))
-                                                .frame(height: 80)
-                                                .overlay(
-                                                    Group {
-                                                        if theme == .vibe {
-                                                            LinearGradient(
-                                                                colors: [
-                                                                    Color(hex: "#FF6B9D").opacity(0.3),
-                                                                    Color(hex: "#C84FFF").opacity(0.2)
-                                                                ],
-                                                                startPoint: .topLeading,
-                                                                endPoint: .bottomTrailing
-                                                            )
-                                                            .clipShape(RoundedRectangle(cornerRadius: 16))
+                                        VStack(spacing: 6) {
+                                            ZStack {
+                                                RoundedRectangle(cornerRadius: 12)
+                                                    .fill(theme.background)
+                                                    .frame(height: 52)
+                                                    .overlay(
+                                                        Group {
+                                                            if theme == .vibe {
+                                                                LinearGradient(
+                                                                    colors: [
+                                                                        Color(hex: "#FF6B9D").opacity(0.3),
+                                                                        Color(hex: "#C84FFF").opacity(0.2)
+                                                                    ],
+                                                                    startPoint: .topLeading,
+                                                                    endPoint: .bottomTrailing
+                                                                )
+                                                                .clipShape(RoundedRectangle(cornerRadius: 12))
+                                                            }
                                                         }
-                                                    }
-                                                )
-                                                .overlay(
-                                                    RoundedRectangle(cornerRadius: 16)
-                                                        .stroke(
-                                                            themeManager.current == theme ? themeManager.current.accent : Color(hex: "#2A2A2A"),
-                                                            lineWidth: themeManager.current == theme ? 1.5 : 0.5
-                                                        )
-                                                )
-                                            
-                                            VStack(spacing: 4) {
-                                                Text(theme == .dark ? "✦" : "◈")
-                                                    .font(.system(size: 22))
+                                                    )
+                                                    .overlay(
+                                                        RoundedRectangle(cornerRadius: 12)
+                                                            .stroke(
+                                                                themeManager.current == theme ? theme.accent : Color(hex: "#2A2A2A").opacity(0.3),
+                                                                lineWidth: themeManager.current == theme ? 1.5 : 0.5
+                                                            )
+                                                    )
+                                                
+                                                Text(theme == .dark ? "✦" : theme == .vibe ? "◈" : theme == .white ? "○" : "◉")
+                                                    .font(.system(size: 18))
                                                     .foregroundColor(theme.accent)
-                                                Text(theme.displayName.lowercased())
-                                                    .font(.system(size: 12, weight: .medium))
-                                                    .foregroundColor(themeManager.current == theme ? .white : themeManager.current.textSecondary)
                                             }
+                                            
+                                            Text(theme.displayName.lowercased())
+                                                .font(.system(size: 10, weight: .medium))
+                                                .foregroundColor(themeManager.current == theme ? themeManager.current.accent : themeManager.current.textSecondary)
                                         }
                                     }
                                     .buttonStyle(.plain)
@@ -158,7 +159,7 @@ struct SettingsView: View {
                     .frame(width: 20)
                 Text(title)
                     .font(.system(size: 15))
-                    .foregroundColor(.white)
+                    .foregroundColor(themeManager.current.textPrimary)
                 Spacer()
                 Image(systemName: "chevron.right")
                     .font(.system(size: 12))

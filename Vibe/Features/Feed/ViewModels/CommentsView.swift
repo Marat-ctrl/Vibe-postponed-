@@ -112,7 +112,7 @@ struct CommentsView: View {
                                             HStack {
                                                 Text(comment.authorUsername)
                                                     .font(.system(size: 13, weight: .semibold))
-                                                    .foregroundColor(.white)
+                                                    .foregroundColor(themeManager.current.textPrimary)
                                                 Spacer()
                                                 Text(timeAgo(from: comment.createdAt))
                                                     .font(.system(size: 11, weight: .light))
@@ -120,7 +120,7 @@ struct CommentsView: View {
                                             }
                                             Text(comment.text)
                                                 .font(.system(size: 14, weight: .light))
-                                                .foregroundColor(Color(hex: "#CCCCCC"))
+                                                .foregroundColor(themeManager.current.isLight ? Color(hex: "#4A5568") : Color(hex:  "#CCCCCC"))
                                                 .lineSpacing(3)
                                         }
                                     }

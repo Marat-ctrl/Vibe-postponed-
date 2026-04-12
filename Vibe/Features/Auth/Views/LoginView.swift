@@ -43,12 +43,12 @@ struct LoginView: View {
                             )
                         Text("V")
                             .font(.custom("Georgia-Italic", size: 28))
-                            .foregroundColor(.white)
+                            .foregroundColor(themeManager.current.textPrimary)
                     }
                     
                     Text("Vibe")
                         .font(.custom("Georgia-Italic", size: 32))
-                        .foregroundColor(.white)
+                        .foregroundColor(themeManager.current.textPrimary)
                     
                     Text("feel the moment")
                         .font(.system(size: 12, weight: .light))
@@ -91,7 +91,7 @@ struct LoginView: View {
                             } else {
                                 Text("войти")
                                     .font(.system(size: 16, weight: .medium))
-                                    .foregroundColor(.white)
+                                    .foregroundColor(themeManager.current.textPrimary)
                             }
                         }
                         .frame(maxWidth: .infinity)

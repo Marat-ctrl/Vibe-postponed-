@@ -38,7 +38,7 @@ struct PrivacyView: View {
                             
                             Text("ваши данные защищены")
                                 .font(.system(size: 20, weight: .semibold))
-                                .foregroundColor(.white)
+                                .foregroundColor(themeManager.current.textPrimary)
                         }
                         .padding(.top, 32)
                         
@@ -80,7 +80,7 @@ struct PrivacyView: View {
             VStack(alignment: .leading, spacing: 6) {
                 Text(title)
                     .font(.system(size: 15, weight: .semibold))
-                    .foregroundColor(.white)
+                    .foregroundColor(themeManager.current.textPrimary)
                 Text(text)
                     .font(.system(size: 13, weight: .light))
                     .foregroundColor(themeManager.current.textSecondary)

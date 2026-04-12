@@ -32,7 +32,7 @@ struct SearchView: View {
                                 prompt: Text("поиск пользователей")
                                     .foregroundColor(Color(hex: "#333333")))
                                 .font(.system(size: 15))
-                                .foregroundColor(.white)
+                                .foregroundColor(themeManager.current.textPrimary)
                                 .textInputAutocapitalization(.never)
                                 .autocorrectionDisabled()
                         }
@@ -120,7 +120,7 @@ struct SearchView: View {
                                             VStack(alignment: .leading, spacing: 3) {
                                                 Text(user.username)
                                                     .font(.system(size: 15, weight: .medium))
-                                                    .foregroundColor(.white)
+                                                    .foregroundColor(themeManager.current.textPrimary)
                                                 if !user.bio.isEmpty {
                                                     Text(user.bio)
                                                         .font(.system(size: 12, weight: .light))

@@ -67,7 +67,7 @@ struct ProfileView: View {
                                 VStack(spacing: 6) {
                                     Text("@\(authVM.currentUser?.username ?? "—")")
                                         .font(.system(size: 22, weight: .semibold))
-                                        .foregroundColor(.white)
+                                        .foregroundColor(themeManager.current.textPrimary)
                                     
                                     if let bio = authVM.currentUser?.bio, !bio.isEmpty {
                                         Text(bio)
@@ -79,7 +79,7 @@ struct ProfileView: View {
                                     
                                     Text(authVM.userSession?.email ?? "")
                                         .font(.system(size: 12, weight: .light))
-                                        .foregroundColor(themeManager.current.textSecondary.opacity(0.4))
+                                        .foregroundColor(themeManager.current.textSecondary.opacity(0.6))
                                 }
                             }
                             .padding(.top, 16)
@@ -162,7 +162,7 @@ struct ProfileView: View {
                     .frame(width: 20)
                 Text(title)
                     .font(.system(size: 15))
-                    .foregroundColor(.white)
+                    .foregroundColor(themeManager.current.textPrimary)
                 Spacer()
                 Image(systemName: "chevron.right")
                     .font(.system(size: 12))
@@ -186,7 +186,7 @@ struct ProfileView: View {
         VStack(spacing: 4) {
             Text(value)
                 .font(.system(size: 20, weight: .semibold))
-                .foregroundColor(.white)
+                .foregroundColor(themeManager.current.textPrimary)
             Text(label)
                 .font(.system(size: 11, weight: .light))
                 .foregroundColor(themeManager.current.textSecondary)

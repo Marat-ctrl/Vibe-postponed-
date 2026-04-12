@@ -80,7 +80,7 @@ struct CreatePostView: View {
                     VStack(alignment: .leading, spacing: 4) {
                         Text(username)
                             .font(.system(size: 14, weight: .semibold))
-                            .foregroundColor(.white)
+                            .foregroundColor(themeManager.current.textPrimary)
                         
                         ZStack(alignment: .topLeading) {
                             if text.isEmpty {
@@ -91,7 +91,7 @@ struct CreatePostView: View {
                             }
                             TextEditor(text: $text)
                                 .font(.system(size: 16, weight: .light))
-                                .foregroundColor(Color(hex: "#CCCCCC"))
+                                .foregroundColor(themeManager.current.isLight ? Color(hex: "#4A5568") : Color(hex: "#CCCCCC"))
                                 .scrollContentBackground(.hidden)
                                 .background(.clear)
                                 .frame(minHeight: 120)

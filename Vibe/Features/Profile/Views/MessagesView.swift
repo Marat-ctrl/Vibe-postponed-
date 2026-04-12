@@ -68,7 +68,7 @@ struct MessagesView: View {
                                                 HStack {
                                                     Text(chat.otherUsername)
                                                         .font(.system(size: 15, weight: .medium))
-                                                        .foregroundColor(.white)
+                                                        .foregroundColor(themeManager.current.textPrimary)
                                                     Spacer()
                                                     Text(timeString(from: chat.lastMessageTime))
                                                         .font(.system(size: 12, weight: .light))

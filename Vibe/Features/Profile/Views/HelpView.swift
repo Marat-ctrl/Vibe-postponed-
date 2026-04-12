@@ -38,7 +38,7 @@ struct HelpView: View {
                             
                             Text("мы здесь чтобы помочь")
                                 .font(.system(size: 20, weight: .semibold))
-                                .foregroundColor(.white)
+                                .foregroundColor(themeManager.current.textPrimary)
                             
                             Text("если у вас возникли вопросы или проблемы — напишите нам")
                                 .font(.system(size: 14, weight: .light))

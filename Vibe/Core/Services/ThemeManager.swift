@@ -4,13 +4,20 @@ import Combine
 enum AppTheme: String, CaseIterable {
     case dark = "Dark"
     case vibe = "Vibe"
+    case white = "White"
+    case aqua = "Aqua"
     
     var displayName: String { rawValue }
+    
+    var isLight: Bool { self == .white || self == .aqua }
+    var isVibe: Bool { self == .vibe }
     
     var accent: Color {
         switch self {
         case .dark: return Color(hex: "#FF6B9D")
         case .vibe: return Color(hex: "#FF6B9D")
+        case .white: return Color(hex: "#00B4D8")
+        case .aqua: return Color(hex: "#00B4D8")
         }
     }
     
@@ -18,6 +25,8 @@ enum AppTheme: String, CaseIterable {
         switch self {
         case .dark: return Color(hex: "#0A0A0A")
         case .vibe: return Color(hex: "#0D0018")
+        case .white: return Color(hex: "#F5F7FA")
+        case .aqua: return Color(hex: "#F5F7FA")
         }
     }
     
@@ -25,6 +34,8 @@ enum AppTheme: String, CaseIterable {
         switch self {
         case .dark: return Color(hex: "#111111")
         case .vibe: return Color(hex: "#ffffff").opacity(0.05)
+        case .white: return Color(hex: "#FFFFFF")
+        case .aqua: return Color(hex: "#FFFFFF")
         }
     }
     
@@ -32,19 +43,30 @@ enum AppTheme: String, CaseIterable {
         switch self {
         case .dark: return Color(hex: "#1E1E1E")
         case .vibe: return Color(hex: "#ffffff").opacity(0.08)
+        case .white: return Color(hex: "#E2E8F0")
+        case .aqua: return Color(hex: "#00B4D8").opacity(0.2)
         }
     }
     
-    var textPrimary: Color { .white }
+    var textPrimary: Color {
+        switch self {
+        case .dark, .vibe: return .white
+        case .white, .aqua: return Color(hex: "#1A1A2E")
+        }
+    }
     
     var textSecondary: Color {
         switch self {
         case .dark: return Color(hex: "#888888")
         case .vibe: return Color(hex: "#ffffff").opacity(0.45)
+        case .white: return Color(hex: "#718096")
+        case .aqua: return Color(hex: "#718096")
         }
     }
     
-    var isVibe: Bool { self == .vibe }
+    var colorScheme: ColorScheme {
+        isLight ? .light : .dark
+    }
 }
 
 class ThemeManager: ObservableObject {
@@ -61,6 +83,7 @@ class ThemeManager: ObservableObject {
         self.current = AppTheme(rawValue: saved) ?? .dark
     }
 }
+
 extension Color {
     init(hex: String) {
         let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)

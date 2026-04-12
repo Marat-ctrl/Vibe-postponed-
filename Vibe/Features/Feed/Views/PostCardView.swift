@@ -1,17 +1,16 @@
 import SwiftUI
 import FirebaseFirestore
-import FirebaseAuth
 import Combine
+import FirebaseAuth
 
 struct PostCardView: View {
     let post: Post
     let onLike: () async -> Void
     var onAuthorTap: (() -> Void)? = nil
     @EnvironmentObject var themeManager: ThemeManager
+    @EnvironmentObject var authVM: AuthViewModel
     @State private var liked = false
     @State private var likeScale: CGFloat = 1.0
-    @EnvironmentObject var authVM: AuthViewModel
-    
     
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -21,7 +20,9 @@ struct PostCardView: View {
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 12)
-                            .fill(Color(hex: "#1A1218"))
+                            .fill(themeManager.current.isLight
+                                ? themeManager.current.accent.opacity(0.1)
+                                : Color(hex: "#1A1218"))
                             .frame(width: 40, height: 40)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 12)
@@ -34,55 +35,52 @@ struct PostCardView: View {
                 }
                 
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("@\(post.authorUsername)")
-                        .font(.system(size: 14, weight: .semibold))
-                        .foregroundColor(.white)
+                    HStack(spacing: 6) {
+                        Text("@\(post.authorUsername)")
+                            .font(.system(size: 14, weight: .semibold))
+                            .foregroundColor(themeManager.current.textPrimary)
+                        
+                        if post.authorId == authVM.userSession?.uid {
+                            Text("вы")
+                                .font(.system(size: 10, weight: .medium))
+                                .foregroundColor(themeManager.current.accent)
+                                .padding(.horizontal, 6)
+                                .padding(.vertical, 2)
+                                .background(
+                                    Capsule()
+                                        .fill(themeManager.current.accent.opacity(0.1))
+                                        .overlay(Capsule().stroke(themeManager.current.accent.opacity(0.2), lineWidth: 0.5))
+                                )
+                        }
+                    }
                     Text(timeAgo(from: post.createdAt))
                         .font(.system(size: 12, weight: .light))
                         .foregroundColor(themeManager.current.textSecondary)
                 }
                 
-                if post.authorId == authVM.userSession?.uid {
-                    Text("вы")
-                        .font(.system(size: 10, weight: .medium))
-                        .foregroundColor(themeManager.current.accent)
-                        .padding(.horizontal, 6)
-                        .padding(.vertical, 2)
-                        .background(
-                            Capsule()
-                                .fill(themeManager.current.accent.opacity(0.1))
-                                .overlay(Capsule().stroke(themeManager.current.accent.opacity(0.2), lineWidth: 0.5))
-                        )
-                }
-                
                 Spacer()
-                
-                
                 
                 Text("✦")
                     .font(.system(size: 10))
                     .foregroundColor(themeManager.current.accent.opacity(0.3))
             }
             
-            
-            
             Text(post.text)
                 .font(.system(size: 15, weight: .light))
-                .foregroundColor(Color(hex: "#CCCCCC"))
+                .foregroundColor(themeManager.current.isLight ? Color(hex: "#4A5568") : Color(hex: "#CCCCCC"))
                 .lineSpacing(4)
             
             HStack(spacing: 20) {
                 Button {
                     HapticManager.impact(.soft)
+                    withAnimation(.spring(response: 0.3, dampingFraction: 0.5)) {
+                        likeScale = 1.4
+                    }
+                    withAnimation(.spring(response: 0.3, dampingFraction: 0.5).delay(0.1)) {
+                        likeScale = 1.0
+                    }
                     Task {
-                        withAnimation(.spring(response: 0.3, dampingFraction: 0.5)) {
-                            likeScale = 1.4
-                        }
-                        withAnimation(.spring(response: 0.3, dampingFraction: 0.5).delay(0.1)) {
-                            likeScale = 1.0
-                        }
                         await onLike()
-                        // после лайка перепроверяем реальное состояние
                         guard let uid = authVM.userSession?.uid else { return }
                         let db = Firestore.firestore()
                         let doc = try? await db.collection("posts").document(post.id)
@@ -102,13 +100,9 @@ struct PostCardView: View {
                 }
                 
                 NavigationLink(destination:
-                    CommentsView(
-                        postId: post.id,
-                        postText: post.text,
-                        postAuthor: post.authorUsername
-                    )
-                    .environmentObject(themeManager)
-                    .environmentObject(authVM)
+                    CommentsView(postId: post.id, postText: post.text, postAuthor: post.authorUsername)
+                        .environmentObject(themeManager)
+                        .environmentObject(authVM)
                 ) {
                     HStack(spacing: 5) {
                         Image(systemName: "bubble.right")
@@ -120,6 +114,7 @@ struct PostCardView: View {
                     }
                 }
                 .buttonStyle(.plain)
+                
                 Spacer()
             }
         }
@@ -129,10 +124,20 @@ struct PostCardView: View {
                 .fill(themeManager.current.surface)
                 .overlay(
                     RoundedRectangle(cornerRadius: 20)
-                        .stroke(themeManager.current.surfaceBorder, lineWidth: 0.5)
+                        .stroke(
+                            themeManager.current == .aqua
+                                ? themeManager.current.accent.opacity(0.2)
+                                : themeManager.current.surfaceBorder,
+                            lineWidth: themeManager.current == .aqua ? 1 : 0.5
+                        )
+                )
+                .shadow(
+                    color: themeManager.current.isLight
+                        ? themeManager.current.accent.opacity(0.06)
+                        : Color.clear,
+                    radius: 8, x: 0, y: 2
                 )
         )
-        
         .task {
             guard let uid = authVM.userSession?.uid else { return }
             let db = Firestore.firestore()
@@ -140,7 +145,6 @@ struct PostCardView: View {
                 .collection("likes").document(uid).getDocument()
             liked = doc?.exists ?? false
         }
-        
     }
     
     func timeAgo(from date: Date) -> String {

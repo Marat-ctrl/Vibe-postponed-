@@ -1,5 +1,5 @@
 import SwiftUI
-import Combine
+import Combine 
 
 struct ContentView: View {
     @EnvironmentObject var authVM: AuthViewModel
@@ -18,6 +18,6 @@ struct ContentView: View {
                 }
             }
         }
-        .preferredColorScheme(.dark)
+        .preferredColorScheme(themeManager.current.colorScheme)
     }
 }

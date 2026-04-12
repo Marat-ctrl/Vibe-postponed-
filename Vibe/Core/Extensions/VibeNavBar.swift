@@ -23,11 +23,11 @@ struct VibeNavBar<TrailingContent: View>: View {
                 if isLogo {
                     Text("Vibe")
                         .font(.custom("Georgia-Italic", size: 24))
-                        .foregroundColor(.white)
+                        .foregroundColor(themeManager.current.textPrimary)
                 } else {
                     Text(title)
                         .font(.custom("Georgia-Italic", size: 22))
-                        .foregroundColor(.white)
+                        .foregroundColor(themeManager.current.textPrimary)
                 }
                 Spacer()
             }
@@ -40,16 +40,8 @@ struct VibeNavBar<TrailingContent: View>: View {
         }
         .padding(.vertical, 14)
         .background(
-            LinearGradient(
-                colors: [
-                    themeManager.current.background,
-                    themeManager.current.background,
-                    themeManager.current.background.opacity(0)
-                ],
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .ignoresSafeArea()
+            themeManager.current.background
+                .ignoresSafeArea(edges: .top)
         )
         .opacity(isVisible ? 1 : 0)
         .offset(y: isVisible ? 0 : -20)

@@ -101,7 +101,7 @@ struct NotificationsView: View {
             VStack(alignment: .leading, spacing: 2) {
                 Text(title)
                     .font(.system(size: 15))
-                    .foregroundColor(.white)
+                    .foregroundColor(themeManager.current.textPrimary)
                 Text(subtitle)
                     .font(.system(size: 12, weight: .light))
                     .foregroundColor(themeManager.current.textSecondary)

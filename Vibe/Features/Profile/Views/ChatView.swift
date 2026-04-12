@@ -73,7 +73,7 @@ struct ChatView: View {
                         prompt: Text("сообщение...")
                             .foregroundColor(Color(hex: "#333333")))
                         .font(.system(size: 15))
-                        .foregroundColor(.white)
+                        .foregroundColor(themeManager.current.textPrimary)
                         .padding(.horizontal, 16)
                         .padding(.vertical, 12)
                         .background(
@@ -145,7 +145,7 @@ struct MessageBubble: View {
             VStack(alignment: isCurrentUser ? .trailing : .leading, spacing: 4) {
                 Text(message.text)
                     .font(.system(size: 15, weight: .light))
-                    .foregroundColor(isCurrentUser ? .white : Color(hex: "#CCCCCC"))
+                    .foregroundColor(isCurrentUser ? .white : themeManager.current.textPrimary)
                     .padding(.horizontal, 14)
                     .padding(.vertical, 10)
                     .background(

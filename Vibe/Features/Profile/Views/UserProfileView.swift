@@ -77,7 +77,7 @@ struct UserProfileView: View {
                                 VStack(spacing: 4) {
                                     Text("@\(user.username)")
                                         .font(.system(size: 20, weight: .semibold))
-                                        .foregroundColor(.white)
+                                        .foregroundColor(themeManager.current.textPrimary)
                                     if !user.bio.isEmpty {
                                         Text(user.bio)
                                             .font(.system(size: 13, weight: .light))
@@ -231,7 +231,7 @@ struct UserProfileView: View {
         VStack(spacing: 4) {
             Text(value)
                 .font(.system(size: 18, weight: .semibold))
-                .foregroundColor(.white)
+                .foregroundColor(themeManager.current.textPrimary)
             Text(label)
                 .font(.system(size: 11, weight: .light))
                 .foregroundColor(themeManager.current.textSecondary)
