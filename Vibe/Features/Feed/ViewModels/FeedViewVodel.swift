@@ -59,6 +59,8 @@ class FeedViewModel: ObservableObject {
             "createdAt": Timestamp(date: Date())
         ]
         try? await db.collection("posts").document(postId).setData(data)
+        try? await db.collection("users").document(uid).setData(
+            ["postsCount": FieldValue.increment(Int64(1))], merge: true)
     }
     
     func likePost(postId: String) async {

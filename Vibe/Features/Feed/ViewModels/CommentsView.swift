@@ -179,6 +179,7 @@ struct CommentsView: View {
                 .background(themeManager.current.background)
             }
         }
+        .hideKeyboardOnTap()
         .navigationBarHidden(true)
         .toolbar(.hidden, for: .tabBar)
         .onAppear { focused = true }

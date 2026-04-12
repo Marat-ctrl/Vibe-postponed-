@@ -111,6 +111,10 @@ struct CreatePostView: View {
                 .padding(.horizontal, 24)
                 .padding(.bottom, 32)
             }
+            
+            .hideKeyboardOnTap()
+            .navigationBarHidden(true)
+            
         }
     }
 }

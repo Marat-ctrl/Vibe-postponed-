@@ -11,8 +11,10 @@ class AuthViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var errorMessage = ""
     @Published var currentUser: VUser?
+   
     
     private var userListener: ListenerRegistration?
+    
     
     init() {
         self.userSession = Auth.auth().currentUser
@@ -37,6 +39,7 @@ class AuthViewModel: ObservableObject {
                 u.followersCount = data["followersCount"] as? Int ?? 0
                 u.followingCount = data["followingCount"] as? Int ?? 0
                 u.bio = data["bio"] as? String ?? ""
+                u.postsCount = data["postsCount"] as? Int ?? 0
                 self.currentUser = u
             }
     }

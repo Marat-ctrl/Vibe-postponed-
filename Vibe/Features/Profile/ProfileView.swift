@@ -86,7 +86,7 @@ struct ProfileView: View {
                             .padding(.horizontal, 24)
                             
                             HStack(spacing: 0) {
-                                statCell(value: "\(userPosts.count)", label: "посты")
+                                statCell(value: "\(authVM.currentUser?.postsCount ?? 0)", label: "посты")
                                 Rectangle()
                                     .fill(themeManager.current.surfaceBorder)
                                     .frame(width: 0.5)
@@ -149,7 +149,7 @@ struct ProfileView: View {
             }
             .task {
                 await authVM.fetchCurrentUser()
-                await fetchUserPosts()
+                
             }
         }
     }

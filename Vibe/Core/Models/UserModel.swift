@@ -8,6 +8,7 @@ struct VUser: Identifiable, Codable {
     var avatarURL: String
     var followersCount: Int
     var followingCount: Int
+    var postsCount: Int
     var createdAt: Date
     
     init(id: String, username: String, displayName: String) {
@@ -18,6 +19,7 @@ struct VUser: Identifiable, Codable {
         self.avatarURL = ""
         self.followersCount = 0
         self.followingCount = 0
+        self.postsCount = 0
         self.createdAt = Date()
     }
 }

@@ -122,6 +122,7 @@ struct ChatView: View {
                 )
             }
         }
+        .hideKeyboardOnTap()
         .navigationBarHidden(true)
         .toolbar(.hidden, for: .tabBar)
         .task {

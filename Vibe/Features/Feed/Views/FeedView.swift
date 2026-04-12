@@ -102,6 +102,7 @@ struct FeedView: View {
                     }
                 }
             }
+            .hideKeyboardOnTap()
             .navigationBarHidden(true)
             .sheet(isPresented: $showCreatePost) {
                 CreatePostView(feedVM: feedVM, username: username)
