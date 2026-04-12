@@ -136,11 +136,9 @@ struct ProfileView: View {
                     .environmentObject(themeManager)
             }
             .navigationDestination(isPresented: $showPosts) {
-                MyPostsView(posts: userPosts, onLike: { post in
-                    await likePost(post: post)
-                })
-                .environmentObject(authVM)
-                .environmentObject(themeManager)
+                MyPostsView()
+                    .environmentObject(authVM)
+                    .environmentObject(themeManager)
             }
             .navigationDestination(isPresented: $showSettings) {
                 SettingsView()
