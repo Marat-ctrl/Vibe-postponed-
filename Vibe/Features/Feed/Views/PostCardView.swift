@@ -34,7 +34,7 @@ struct PostCardView: View {
                 }
                 
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(post.authorUsername)
+                    Text("@\(post.authorUsername)")
                         .font(.system(size: 14, weight: .semibold))
                         .foregroundColor(.white)
                     Text(timeAgo(from: post.createdAt))

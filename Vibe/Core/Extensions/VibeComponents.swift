@@ -9,7 +9,7 @@ struct VibeTextField: View {
     
     var body: some View {
         TextField("", text: $text, prompt: Text(placeholder)
-            .foregroundColor(Color(hex: "#444444")))
+            .foregroundColor(Color(hex: "#555555")))
             .font(.system(size: 15))
             .foregroundColor(.white)
             .keyboardType(keyboardType)
@@ -19,10 +19,10 @@ struct VibeTextField: View {
             .padding(.vertical, 16)
             .background(
                 RoundedRectangle(cornerRadius: 14)
-                    .fill(Color(hex: "#111111"))
+                    .fill(themeManager.current.surface)
                     .overlay(
                         RoundedRectangle(cornerRadius: 14)
-                            .stroke(Color(hex: "#1E1E1E"), lineWidth: 0.5)
+                            .stroke(themeManager.current.surfaceBorder, lineWidth: 0.5)
                     )
             )
     }
@@ -39,10 +39,10 @@ struct VibeSecureField: View {
             Group {
                 if isVisible {
                     TextField("", text: $text, prompt: Text(placeholder)
-                        .foregroundColor(Color(hex: "#444444")))
+                        .foregroundColor(Color(hex: "#555555")))
                 } else {
                     SecureField("", text: $text, prompt: Text(placeholder)
-                        .foregroundColor(Color(hex: "#444444")))
+                        .foregroundColor(Color(hex: "#555555")))
                 }
             }
             .font(.system(size: 15))
@@ -55,7 +55,7 @@ struct VibeSecureField: View {
             } label: {
                 Image(systemName: isVisible ? "eye.slash" : "eye")
                     .font(.system(size: 14))
-                    .foregroundColor(Color(hex: "#444444"))
+                    .foregroundColor(Color(hex: "#555555"))
             }
         }
         .padding(.horizontal, 16)

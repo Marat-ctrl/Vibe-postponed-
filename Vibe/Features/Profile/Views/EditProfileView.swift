@@ -140,17 +140,31 @@ struct EditProfileView: View {
     
     func saveProfile() async {
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        let trimmedUsername = username.trimmingCharacters(in: .whitespaces)
-        let trimmedBio = bio.trimmingCharacters(in: .whitespaces)
-        guard !trimmedUsername.isEmpty else { return }
+        let trimmedUsername = username.lowercased()
+            .trimmingCharacters(in: .whitespaces)
+            .replacingOccurrences(of: "@", with: "")
+        
+        guard trimmedUsername.count >= 3 else {
+            errorMessage = "имя пользователя минимум 3 символа"
+            return
+        }
         
         isLoading = true
         errorMessage = ""
         
+        if trimmedUsername != authVM.currentUser?.username {
+            let available = await authVM.isUsernameAvailable(trimmedUsername)
+            guard available else {
+                errorMessage = "@\(trimmedUsername) уже занят"
+                isLoading = false
+                return
+            }
+        }
+        
         do {
             try await Firestore.firestore().collection("users").document(uid).setData([
                 "username": trimmedUsername,
-                "bio": trimmedBio
+                "bio": bio.trimmingCharacters(in: .whitespaces)
             ], merge: true)
             await authVM.fetchCurrentUser()
             dismiss()

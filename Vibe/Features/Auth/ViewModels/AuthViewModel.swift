@@ -54,13 +54,39 @@ class AuthViewModel: ObservableObject {
         isLoading = false
     }
     
+    func isUsernameAvailable(_ username: String) async -> Bool {
+        let snapshot = try? await Firestore.firestore()
+            .collection("users")
+            .whereField("username", isEqualTo: username.lowercased())
+            .getDocuments()
+        return snapshot?.documents.isEmpty ?? true
+    }
+
     func signUp(email: String, password: String, username: String) async {
         isLoading = true
         errorMessage = ""
+        
+        let cleanUsername = username.lowercased()
+            .trimmingCharacters(in: .whitespaces)
+            .replacingOccurrences(of: "@", with: "")
+        
+        guard cleanUsername.count >= 3 else {
+            errorMessage = "имя пользователя минимум 3 символа"
+            isLoading = false
+            return
+        }
+        
+        let available = await isUsernameAvailable(cleanUsername)
+        guard available else {
+            errorMessage = "@\(cleanUsername) уже занят"
+            isLoading = false
+            return
+        }
+        
         do {
             let result = try await Auth.auth().createUser(withEmail: email, password: password)
             self.userSession = result.user
-            await saveUserToFirestore(uid: result.user.uid, email: email, username: username)
+            await saveUserToFirestore(uid: result.user.uid, email: email, username: cleanUsername)
             startListeningToCurrentUser(uid: result.user.uid)
         } catch {
             errorMessage = error.localizedDescription

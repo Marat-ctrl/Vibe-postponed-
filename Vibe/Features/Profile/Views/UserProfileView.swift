@@ -75,7 +75,7 @@ struct UserProfileView: View {
                                 }
                                 
                                 VStack(spacing: 4) {
-                                    Text(user.username)
+                                    Text("@\(user.username)")
                                         .font(.system(size: 20, weight: .semibold))
                                         .foregroundColor(.white)
                                     if !user.bio.isEmpty {
