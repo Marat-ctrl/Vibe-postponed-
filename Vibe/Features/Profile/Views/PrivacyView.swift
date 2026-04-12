@@ -44,7 +44,7 @@ struct PrivacyView: View {
                         
                         VStack(spacing: 12) {
                             privacyCard(
-                                icon: "lock.fill",
+                                icon: "shield.lefthalf.filled",
                                 title: "сквозное шифрование",
                                 text: "все сообщения защищены сквозным шифрованием — никто кроме вас и собеседника не может их прочитать"
                             )
