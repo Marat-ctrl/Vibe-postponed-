@@ -74,10 +74,10 @@ struct PrivacyView: View {
             Image(systemName: icon)
                 .font(.system(size: 20))
                 .foregroundColor(themeManager.current.accent)
-                .frame(width: 28)
+                .frame(width: 28, height: 28)
                 .padding(.top, 2)
             
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: 6) {
                 Text(title)
                     .font(.system(size: 15, weight: .semibold))
                     .foregroundColor(.white)
@@ -85,9 +85,12 @@ struct PrivacyView: View {
                     .font(.system(size: 13, weight: .light))
                     .foregroundColor(themeManager.current.textSecondary)
                     .lineSpacing(4)
+                    .fixedSize(horizontal: false, vertical: true)
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
         .padding(16)
+        .frame(maxWidth: .infinity)
         .background(
             RoundedRectangle(cornerRadius: 14)
                 .fill(themeManager.current.surface)
