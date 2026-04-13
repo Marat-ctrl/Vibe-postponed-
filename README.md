@@ -1,4 +1,7 @@
 
+
+
+
 ⚠️ Project on Pause / Looking for Maintainers
 I have decided to wrap up my work on this project for now. The core foundation is already built, but I no longer have the resources to bring it to full completion. If you have the desire to polish the idea, add new features, or simply practice your Swift/Firebase skills — I’d be happy to see your pull requests or forks. Feel free to use it and make it your own!
 
