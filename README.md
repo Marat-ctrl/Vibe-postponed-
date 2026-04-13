@@ -1,3 +1,6 @@
+<img width="323" height="703" alt="Снимок экрана 2026-04-13 в 17 26 26" src="https://github.com/user-attachments/assets/b81ad5b6-d6a5-4895-802f-23bd4915341a" />
+<img width="319" height="694" alt="Снимок экрана 2026-04-13 в 17 26 18" src="https://github.com/user-attachments/assets/31e293e9-ae9b-4034-bb90-4152c6053239" />
+<img width="332" height="698" alt="Снимок экрана 2026-04-13 в 17 26 10" src="https://github.com/user-attachments/assets/60c01794-eb4b-44e7-8a50-43b4e8671eab" />
 
 
 
