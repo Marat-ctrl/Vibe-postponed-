@@ -5,6 +5,26 @@ I have decided to wrap up my work on this project for now. The core foundation i
 ⚠️ Проект на паузе / Ищет мейнтейнера
 Решил завершить работу над проектом на текущем этапе. Основная база уже заложена, но на полную доработку не хватает ресурса. Если у вас есть желание довести идею до ума, добавить новые фичи или просто попрактиковаться в Swift/Firebase — буду рад вашим пулл-реквестам или форкам. Пользуйтесь на здоровье!
 
+Vibe 🌊
+Social network + messenger for iOS. A Twitter-like experience with clean design and multiple dark themes.
+Tech Stack
+Swift / SwiftUI
+Firebase (Auth, Firestore, Storage)
+Xcode 15+
+Features
+Registration and Authorization
+Feed with likes and comments
+User Subscriptions (Follow/Unfollow)
+Real-time Direct Messages
+User Search
+Multiple Themes (Dark, Vibe, White, Aqua)
+Profile Editing
+Getting Started
+Clone the repository
+Add your own GoogleService-Info.plist from Firebase
+Open Vibe.xcodeproj in Xcode
+Run on a simulator or a physical device
+
 # Vibe 🌊
 
 Социальная сеть + мессенджер для iOS. Аналог Twitter с чистым дизайном и тёмными темами.
